@@ -1,0 +1,19 @@
+export interface IUser{
+  id:number
+  name:string
+  password:string
+  email:string
+  pseudo:string
+  avatar:string
+  twoFactorAuth:boolean
+  twofvalidated:boolean
+  twofsecret:string
+  friends:number[]
+  blocked:number[]
+  onLine:boolean
+  inGame:boolean
+  haveInvitation:boolean
+  matchs:number
+  wins:number
+  lose:number
+}

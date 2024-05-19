@@ -1,0 +1,65 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgres"
+  url      = env("DATABASE_URL")
+}
+
+model User{
+  id    Int     @id @default(autoincrement())
+  name String @unique
+  password String
+  email String @unique
+  pseudo String @unique
+  avatar String @default("avatardefault.jpg")
+  twoFactorAuth Boolean @default(false)
+  twofvalidated Boolean @default(false)
+  twofsecret String @default("none")
+  friends Int[]
+  blocked Int[]
+  onLine Boolean @default(false)
+  inGame Boolean @default(false)
+  haveInvitation Boolean @default(false)
+  haveMessage Boolean @default(false)
+  matchs Int @default(0)
+  wins Int @default(0)
+  lose Int @default(0)
+  p1_games Game[] @relation("Player1")
+  p2_games Game[] @relation("Player2")
+}
+
+model Messages {
+	id			Int			@id @default(autoincrement())
+	content		String
+	sender		Int
+	receiver	Int
+	when		DateTime	@default(now())
+}
+
+model Groupes {
+	id				Int		@id @default(autoincrement())
+	channel_name	String	@unique 
+	private_message	Boolean	@default(true)
+	private_groupe	Boolean	@default(true)
+	password 		String	@default("")
+	owner			Int
+	admin			Int[]
+	banned			Int[]
+	members			Int[]
+}
+
+model Game {
+    id Int @id @default(autoincrement())
+    p1       User     @relation("Player1", fields: [p1Id], references: [id])
+    p1Id     Int
+    p2       User     @relation("Player2", fields: [p2Id], references: [id])
+    p2Id     Int
+    scorP1 Int
+    scorP2 Int
+    playedOn DateTime @default(now())
+}

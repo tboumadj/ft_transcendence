@@ -1,0 +1,65 @@
+## LINKS  ##
+https://angular.io/start/start-deployment
+https://vuejs.org/guide/introduction.html#single-file-components
+https://developer.mozilla.org/fr/docs/Glossary/SPA
+https://blog.dyma.fr/quel-framework-choisir-angular-vue-js-ou-react/
+https://stackoverflow.com/questions/70896560/nestjs-and-passport-local-authguardlocal-validate-never-get-called
+
+whynemo
+
+##
+toujours utiliser npx si pas installer dans machine(-g) mais dans projet
+
+## Test ##
+Jest ts
+https://dbdiagram.io/d
+
+## vue.js ##
+
+npm install @vue/cli
+npx vue create 'projet'
+cd 'projet'
+vue generate component 'component'
+
+
+## Nest ## ##Sudo partout##
+
+sudo npm install @nestjs/cli
+sudo nest new 'projet'
+sudo nest generate resource 'nom'
+------------------ module   ------
+------------------ controller -----
+------------------ service --------
+npm run test
+sudo npm start
+
+##DOCKER
+
+##start in fedora##
+sudo systemctl start docker
+
+docker build -t 'image' /chemin
+docker run -it 'image'
+
+##COMPOSE
+
+docker compose up
+docker compsoe up -d
+#F: docker compose -f up -d --build
+
+docker compose down
+
+docker logs --follow "container"
+docker exec -ti "container" bash 
+
+##STOP
+
+docker compsoe -f "/path.yml" down
+
+##CLEAR
+
+docker systeme prune -a
+docker volume rm $$(docker volume ls -q)
+rm -rf /pathtovolume/*
+rm -rf /pathtovolume
+

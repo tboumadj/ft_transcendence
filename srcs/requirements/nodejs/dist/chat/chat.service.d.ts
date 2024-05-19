@@ -1,0 +1,66 @@
+import { PrismaService } from 'src/prisma/prisma.service';
+import { Request } from 'express';
+import { ChannelDto, EventChannelDto, FullChannelDto, MessageDto } from './dto/chat.dto';
+import { Socket } from 'socket.io';
+import { JwtService } from '@nestjs/jwt';
+import { Request as ExpressRequest } from 'express';
+export declare class ChatService {
+    private prisma;
+    private jwt;
+    private clients;
+    constructor(prisma: PrismaService, jwt: JwtService);
+    handleconnection(client: Socket): Promise<void>;
+    handledisconnect(client: Socket): Promise<void>;
+    messagesChannel(channel: string, req: Request): Promise<{
+        id: number;
+        content: string;
+        sender: number;
+        receiver: number;
+        when: Date;
+    }[]>;
+    myChannels(client: Socket): Promise<(string | {
+        status: string;
+        data: any[];
+    })[]>;
+    usersChannel(channel: string, req: Request): Promise<any>;
+    informationChannel(channel: string, req: Request): Promise<any>;
+    handlechannel(event: string, client: Socket, dto: FullChannelDto): Promise<any[]>;
+    createChannel(client: Socket, dto: ChannelDto): Promise<any[]>;
+    modifyChannel(client: Socket, dto: FullChannelDto): Promise<any[]>;
+    privateChannel(client: Socket, dto: ChannelDto): Promise<any[]>;
+    deleteChannel(client: Socket, id: number): Promise<any[]>;
+    handleEvent(client: Socket, dto: EventChannelDto): Promise<any[]>;
+    joinChannel(dto: EventChannelDto, client: Socket): Promise<any[]>;
+    leftChannel(dto: EventChannelDto, client: Socket): Promise<any[]>;
+    kickUser(dto: EventChannelDto, client: Socket): Promise<any[]>;
+    banUser(dto: EventChannelDto, client: Socket): Promise<any[]>;
+    unBanUser(dto: EventChannelDto, client: Socket): Promise<any[]>;
+    promuteUser(dto: EventChannelDto, client: Socket): Promise<any[]>;
+    unPromuteUser(dto: EventChannelDto, client: Socket): Promise<any[]>;
+    messageEvent(client: Socket, dto: MessageDto): Promise<any[]>;
+    postMessage(dto: MessageDto, id: number): Promise<any[]>;
+    modifyMessage(dto: MessageDto, id: number): Promise<any[]>;
+    deleteMessage(dto: MessageDto, id: number): Promise<any[]>;
+    getUserSocket(client: Socket): Promise<{
+        id: number;
+        name: string;
+        password: string;
+        email: string;
+        pseudo: string;
+        avatar: string;
+        twoFactorAuth: boolean;
+        twofvalidated: boolean;
+        twofsecret: string;
+        friends: number[];
+        blocked: number[];
+        onLine: boolean;
+        inGame: boolean;
+        haveInvitation: boolean;
+        haveMessage: boolean;
+        matchs: number;
+        wins: number;
+        lose: number;
+    }>;
+    getPassword(password: string): string;
+    getUsernameJwt(req: ExpressRequest): Promise<string>;
+}

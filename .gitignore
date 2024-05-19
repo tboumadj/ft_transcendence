@@ -1,0 +1,8 @@
+NesTest/node_modules
+NesTest/test
+NesTest/dist
+QuasarTest/dist
+QuasarTest/node_modules
+QuasarTest/public
+data
+srcs/requirements/nodejs/node_modules
